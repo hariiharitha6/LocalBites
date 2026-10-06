@@ -1,1 +1,0 @@
-- [Large JSX edits](large-jsx-edits.md) — prefer tiny targeted patches for compressed JSX; broad hunks and selectors can fail to match.

@@ -47,3 +47,15 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# Replit internal/project attachments
+.conversation/
+.agents/
+
+# Local development
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+build/
