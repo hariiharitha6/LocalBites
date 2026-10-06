@@ -1,44 +1,50 @@
-# [Project name]
+# LocalBite
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+LocalBite is a mobile-first guide to Kerala food for first-time visitors. It helps people explore dishes and keep a private tasting journey; it is not an ordering app.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- Preview: use the managed `artifacts/localbite: web` workflow.
+- Typecheck: `pnpm --filter @workspace/localbite run typecheck`
+- Local food saves, tried states, notes, comparison choices, filters, preferences, and area are stored in browser localStorage.
+- LocalBite does not require a database, account, API server, or environment secret.
 
 ## Stack
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- React, TypeScript, Vite, and Wouter
+- pnpm workspace package at `artifacts/localbite`
+- Tailwind CSS utilities with the app's own responsive stylesheet
+- No server-side data or authentication is used for this MVP.
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+## Where things live
+
+- `artifacts/localbite/src/App.tsx` — routes and interactive screens.
+- `artifacts/localbite/src/food-content.ts` — typed dish seed content and its source, confidence, price, freshness, allergen, venue, and local-context fields.
+- `artifacts/localbite/src/index.css` — visual styling and responsive layouts.
+- `artifacts/localbite/public/foods/` — reused food photos from the original archive.
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Guest-first: discovery works without login; personal records remain on the device.
+- Seed dish facts and indicative prices are explicitly unverified and marked low confidence.
+- Unknown allergens and venue details stay unknown; the app does not fabricate venues, reviews, opening hours, or distances.
+- Browser location is requested only after a user presses “Use my location”; users can instead enter an area manually.
+- Correction reports are local drafts only; there is no moderation service or ordering/payment flow.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
-
-## User preferences
-
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Explore and search dishes, filter by category, price range, spice estimate, dietary starting point, and experience, and compare up to three dishes.
+- Save foods, mark foods tried, add personal notes, and tune recommendation preferences.
+- Nearby accepts a manually entered area or optional browser location but currently has no verified venue feed.
+- Responsive pages: Discover, Explore, food details, Compare, Nearby, My journey, and Preferences.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Clearing browser storage removes this device's saved foods, notes, filters, preferences, comparisons, area, and report drafts.
+- Never present seed diet tags or ingredient summaries as allergy, religious, or medical safety assurances; users should confirm with the venue.
+- Do not add venue or price claims without a source and verification status.
 
 ## Pointers
 

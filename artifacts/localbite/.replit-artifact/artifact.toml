@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "LocalBite"
+description = "A guest-first Kerala food discovery companion that helps visitors understand local dishes, compare typical prices, and build a personal food journey."
+version = "1.0.0"
+id = "artifacts/localbite"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24462
+
+[services.development]
+run = "pnpm --filter @workspace/localbite run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/localbite", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/localbite/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24462"
+BASE_PATH = "/"
