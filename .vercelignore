@@ -1,0 +1,5 @@
+# Unserved full-resolution image masters
+artifacts/localbite/source-images
+
+# Generated build output
+artifacts/localbite/dist

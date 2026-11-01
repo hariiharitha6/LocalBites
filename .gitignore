@@ -59,3 +59,6 @@ Thumbs.db
 node_modules/
 dist/
 build/
+
+# Local, unserved image masters with unverified provenance
+artifacts/localbite/source-images/
